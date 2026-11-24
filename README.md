@@ -33,6 +33,15 @@
 | [**저전력 온디바이스 AI 영유아 위험 알림**](https://github.com/jjh07026-stack/ondevice-ai-baby-safety) <br> 4인 · 2026.09 | Raspberry Pi 5에서 YOLO11n(TFLite)으로 아기와 위험 물체의 거리를 판단해 휴대폰 알림 <br> **담당: Python 코드 구현** | 4상태 전력 관리로 소비 전력 **−56 %** (4.61 → 2.01 W) |
 | **공유킥보드 주행구역 판별 및 패널티 부여 시스템** <br> 졸업작품 · 팀장 (3인) · 2025 ~ 2026 | YOLO11 기반 인도 · 도로 실시간 판별 → LED 경고 · 리니어 모터 감속, Flask 서버 · 앱 연동 <br> **담당: 팀 총괄, 서버 · 앱, Python, 하드웨어 보조** | YOLO 4종 동일 조건 비교로 모델 선정 (mAP50 0.905) <br> 14 → 40 FPS 최적화, 헬멧 착용 판정 80회 100 % |
 
+## TODO
+
+**UART FIFO Loopback — `tx_busy` 버그 재현 · 수정 · 재검증**
+- [ ] 5 byte 이상 연속 송신 테스트벤치 추가 (FIFO full · overflow 검증)
+- [ ] 연속 송신으로 `tx_busy` 1클럭 지연에 의한 데이터 유실 재현
+- [ ] `uart_tx` 수정: IDLE에서 `tx_start`를 받는 순간 `tx_busy_next = 1`
+- [ ] 수정 후 기존 테스트(FIFO 단독, 1 byte, 랜덤 16 byte) + 연속 송신 테스트 다시 실행해 PASS 확인
+- [ ] 수정 전후 파형 캡처와 결과를 [uart-fifo-loopback](https://github.com/jjh07026-stack/uart-fifo-loopback) README에 정리
+
 ## Awards
 
 | 연도 | 대회 | 수상 |
